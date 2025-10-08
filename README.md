@@ -20,17 +20,18 @@ This solution is portable and reproducible .It can be run either locally or in a
 - PokeAPI – Data source (public REST API)
 
 ## Setup & Running Instructions
-1. Clone Repository : 
-- git clone https://github.com/komal270302/Pok-Pipeline.git
-- cd Pok-Pipeline
+1. Clone Repository : git clone https://github.com/komal270302/Pok-Pipeline.git, cd Pok-Pipeline
 
-2. Environment Variables : Review and update .env with your SQL Server details. The default uses SQL authentication: DB_SERVER=sqlserver DB_NAME=pokemon_db DB_USER=Komal DB_PASSWORD=Komal@123 DB_TRUSTED=NO. For Windows Authentication (commented out), set DB_TRUSTED=YES and remove DB_USER/DB_PASSWORD.
+2. Environment Variables :
+   - Review and update .env with your SQL Server details. The default uses SQL authentication: DB_SERVER=sqlserver DB_NAME=pokemon_db DB_USER=Komal DB_PASSWORD=Komal@123 DB_TRUSTED=NO.
+   - For Windows Authentication (commented out), set DB_TRUSTED=YES and remove DB_USER/DB_PASSWORD.
+
 Note: The SQL Server container uses SA_PASSWORD: "Komal@123" (update in docker-compose.yml if changing .env).
 
-3. Run with Docker (recommended 🚀)
+4. Run with Docker : 
 Build and start services (SQL Server + ETL): docker-compose up --build. This builds the This builds the ETL image from Dockerfile, starts the SQL Server, and runs load_pokemon.py automatically.
 
-4. Run Locally (without Docker) Install dependencies: pip install requests pandas sqlalchemy pyodbc python-dotenv. Ensure SQL Server is running locally (e.g., via SQL Server Express). Run: python load_pokemon.py.
+5. Run Locally (without Docker) Install dependencies: pip install requests pandas sqlalchemy pyodbc python-dotenv. Ensure SQL Server is running locally (e.g., via SQL Server Express). Run: python load_pokemon.py.
 
 ## Database Schema
 This design avoids duplication and allows efficient querying. The pipeline normalizes Pokémon data into the following relational tables:
@@ -48,13 +49,13 @@ This design avoids duplication and allows efficient querying. The pipeline norma
    - db_connection.py abstracts database connectivity db_connection
 
 2. Data Transformation:
-- JSON arrays (types, abilities, stats) → normalized mapping tables
-- Caches (type_cache, ability_cache) prevent duplicate inserts
-- Structured stats dictionary → row-based storage for flexibility
+   - JSON arrays (types, abilities, stats) → normalized mapping tables
+   - Caches (type_cache, ability_cache) prevent duplicate inserts
+   - Structured stats dictionary → row-based storage for flexibility
 
 3. Database:
-- SQL Server chosen for robustness and real-world relevance
-- Schema normalization ensures scalability for thousands of Pokémon
+   - SQL Server chosen for robustness and real-world relevance
+   - Schema normalization ensures scalability for thousands of Pokémon
 
 ## Assumptions
 - Pokémon IDs from the API are globally unique so they are used as primary keys
