@@ -25,8 +25,7 @@ This solution is portable and reproducible .It can be run either locally or in a
 2. Environment Variables :
    - Review and update .env with your SQL Server details. The default uses SQL authentication: DB_SERVER=sqlserver DB_NAME=pokemon_db DB_USER=Komal DB_PASSWORD=Komal@123 DB_TRUSTED=NO.
    - For Windows Authentication (commented out), set DB_TRUSTED=YES and remove DB_USER/DB_PASSWORD.
-
-  Note: The SQL Server container uses SA_PASSWORD: "Komal@123" (update in docker-compose.yml if changing .env).
+   - Note: The SQL Server container uses SA_PASSWORD: "Komal@123" (update in docker-compose.yml if changing .env).
 
 4. Run with Docker : 
 Build and start services (SQL Server + ETL): docker-compose up --build. This builds the This builds the ETL image from Dockerfile, starts the SQL Server, and runs load_pokemon.py automatically.
