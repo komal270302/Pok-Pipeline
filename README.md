@@ -34,7 +34,7 @@ This solution is portable and reproducible .It can be run either locally or in a
 
 5. Run Locally (without Docker) Install dependencies:
    - pip install requests pandas sqlalchemy pyodbc python-dotenv. Ensure SQL Server is running locally (e.g., via SQL Server Express). 
-   - Create schema : sqlcmd -S <server> -U <user> -P <password> -i Create_tables.sql
+   - Create tables : sqlcmd -S <server> -U <user> -P <password> -i Create_tables.sql
    - Set .env with DB config
    - Run: python load_pokemon.py 
 
