@@ -28,9 +28,15 @@ This solution is portable and reproducible .It can be run either locally or in a
    - Note: The SQL Server container uses SA_PASSWORD: "Komal@123" (update in docker-compose.yml if changing .env).
 
 4. Run with Docker : 
-Build and start services (SQL Server + ETL): docker-compose up --build. This builds the This builds the ETL image from Dockerfile, starts the SQL Server, and runs load_pokemon.py automatically.
+   - Build and start services (SQL Server + ETL): docker-compose up --build. This builds the This builds the ETL image from Dockerfile, starts the SQL Server, and runs load_pokemon.py automatically.
+   - Create tables: docker exec -it sqlserver /opt/mssql-tools/bin/sqlcmd \ -S localhost -U SA -P 'Komal@123' \ -i /usr/src/app/Create_tables.sql
+   - Run ETL (if not auto-triggered): docker exec -it pokemon_etl python load_pokemon.py
 
-5. Run Locally (without Docker) Install dependencies: pip install requests pandas sqlalchemy pyodbc python-dotenv. Ensure SQL Server is running locally (e.g., via SQL Server Express). Run: python load_pokemon.py.
+5. Run Locally (without Docker) Install dependencies:
+   - pip install requests pandas sqlalchemy pyodbc python-dotenv. Ensure SQL Server is running locally (e.g., via SQL Server Express). 
+   - Create schema : sqlcmd -S <server> -U <user> -P <password> -i Create_tables.sql
+   - Set .env with DB config
+   - Run: python load_pokemon.py 
 
 ## Database Schema
 This design avoids duplication and allows efficient querying. The pipeline normalizes Pokémon data into the following relational tables:
