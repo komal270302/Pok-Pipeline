@@ -14,7 +14,7 @@ This solution is portable and reproducible .It can be run either locally or in a
 
 ## Tech Stack
 - Python 3.11 – ETL scripting
-- SQLAlchemy – ORM & database interaction
+- SQLAlchemy – Database interaction
 - SQL Server – Relational database
 - Docker & Docker Compose – Container orchestration
 - PokeAPI – Data source (public REST API)
